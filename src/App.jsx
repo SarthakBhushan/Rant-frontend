@@ -12,7 +12,7 @@ const getClientHash = () => {
 };
 
 const clientHash = getClientHash();
-const API = import.meta.env.VITE_API_URL ?? '';
+const API = import.meta.env.BACKEND_API_URL ?? '';
 
 const ClockIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
