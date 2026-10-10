@@ -12,6 +12,7 @@ const getClientHash = () => {
 };
 
 const clientHash = getClientHash();
+const API = import.meta.env.VITE_API_URL ?? '';
 
 const ClockIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -63,7 +64,7 @@ function FeedScreen() {
 
   const fetchRants = async () => {
     try {
-      const res = await fetch('/api/rants?page=0&size=50');
+      const res = await fetch(`${API}/api/rants?page=0&size=50`);
       if (res.ok) {
         const data = await res.json();
         setRants(data.content);
@@ -81,7 +82,7 @@ function FeedScreen() {
 
   const handleVote = async (id, type) => {
     try {
-      const res = await fetch(`/api/rants/${id}/reaction`, {
+      const res = await fetch(`${API}/api/rants/${id}/reaction`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'X-Client-Hash': clientHash },
         body: JSON.stringify({ type })
@@ -154,7 +155,7 @@ function WriteScreen() {
     if (!text.trim() || text.length > 280) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/rants', {
+      const res = await fetch(`${API}/api/rants`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
